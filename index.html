@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Aurika 💖</title>
+
+<style>
+/* ===== BACKGROUND ===== */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#1b2735,#090a0f);
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ===== STARS ===== */
+.star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.8;
+  animation:twinkle 3s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:.2;}
+  to{opacity:1;}
+}
+
+/* ===== FLOWER RAIN ===== */
+.flower{
+  position:fixed;
+  top:-30px;
+  font-size:22px;
+  animation:fall 7s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg);}
+}
+
+/* ===== CARD ===== */
+.card{
+  background:white;
+  width:90%;
+  max-width:420px;
+  padding:25px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 0 45px rgba(255,59,111,.9);
+  position:relative;
+  z-index:5;
+  animation:pop .6s ease;
+}
+@keyframes pop{
+  from{transform:scale(.8);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+/* ===== IMAGE SLIDER ===== */
+.image-box{
+  width:220px;
+  height:300px;
+  margin:auto;
+}
+#slider{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:18px;
+  animation:imageGlow 4s infinite alternate;
+}
+@keyframes imageGlow{
+  from{box-shadow:0 0 10px #ff3b6f;}
+  to{box-shadow:0 0 30px #ff3b6f;}
+}
+
+/* ===== TEXT ===== */
+h2{color:#ff3b6f;}
+
+/* ===== BUTTONS ===== */
+button{
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  border-radius:30px;
+  border:none;
+  margin-top:10px;
+  cursor:pointer;
+}
+.yes{
+  background:#ff3b6f;
+  color:white;
+  animation:heartbeat 1.3s infinite;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+.no{background:#f1f1f1;}
+
+/* ===== CHAT ===== */
+.chat{
+  background:#e5ddd5;
+  padding:12px;
+  border-radius:12px;
+  text-align:left;
+}
+.msg{
+  background:#dcf8c6;
+  padding:8px 12px;
+  border-radius:10px;
+  margin-bottom:6px;
+  animation:chatGlow 2s infinite alternate;
+}
+@keyframes chatGlow{
+  from{box-shadow:0 0 5px #25D366;}
+  to{box-shadow:0 0 15px #25D366;}
+}
+
+/* ===== RING ===== */
+.ringWrap{
+  display:flex;
+  justify-content:center;
+  margin:15px 0;
+}
+.ringWrap img{
+  width:120px;
+  animation:ringPop 1.5s ease forwards;
+}
+@keyframes ringPop{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <div class="image-box">
+    <img id="slider" src="aurika1.jpg">
+  </div>
+
+  <h2>AURIKA 💖</h2>
+  <p id="question">Will you be my Valentine?</p>
+
+  <button class="yes" onclick="yesClicked()">Yes 😍</button>
+  <button class="no" id="noBtn" onclick="noClicked()">No 🙄</button>
+</div>
+
+<script>
+/* ===== STARS ===== */
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  document.body.appendChild(s);
+}
+
+/* ===== FLOWER RAIN ===== */
+setInterval(()=>{
+  const f=document.createElement("div");
+  f.className="flower";
+  f.innerText=["🌸","🌹","💮","🌺"][Math.floor(Math.random()*4)];
+  f.style.left=Math.random()*100+"vw";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),7000);
+},500);
+
+/* ===== IMAGE ROTATION ===== */
+const images=["aurika1.jpg","aurika2.jpg","aurika3.jpg","aurika4.jpg"];
+let i=0;
+setInterval(()=>{
+  slider.src=images[++i%images.length];
+},3000);
+
+/* ===== NO BUTTON ===== */
+const messages=[
+  "Wrong button 😏",
+  "Try again 😂",
+  "Nice try 😜",
+  "YES is waiting 💖",
+  "Aurikaaa 😭"
+];
+function noClicked(){
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+  question.innerText=messages[Math.floor(Math.random()*messages.length)];
+}
+
+/* ===== YES CLICK ===== */
+function yesClicked(){
+  document.getElementById("card").innerHTML=`
+    <h1>I knew it 💖</h1>
+
+    <div class="ringWrap">
+      <img src="ring.png">
+    </div>
+
+    <div class="chat">
+      <div class="msg">Mujhe pata tha ❤️</div>
+      <div class="msg">I love you Aurika 😍</div>
+      <div class="msg">Forever & Always 💍</div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
